@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mess Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to mess management system</h1>
+        <form id="addMemberForm">
+            <h2>Add Member</h2>
+            <input type="text" id="memberName" placeholder="Member Name" required />
+            <button type="submit">Add Member</button>
+            <span id="addMemberMsg"></span>
+        </form>
+
+        <div class="members-list">
+            <h2>All Members</h2>
+            <ul id="membersUl"></ul>
+        </div>
+
+        <div class="deduct-section">
+            <h2>Deduct Cost</h2>
+            <form id="deductForm">
+                <select id="deductMember" required></select>
+                <input type="number" id="deductAmount" placeholder="Amount" min="1" required />
+                <input type="text" id="deductProduct" placeholder="Product Bought" required />
+                <button type="submit">Deduct</button>
+                <span id="deductMsg"></span>
+            </form>
+        </div>
+
+        <div class="deduction-history">
+            <h2>All Deductions</h2>
+            <ul id="deductionList"></ul>
+        </div>
+
+        <div class="deduction-summary">
+            <h2>Total Deduction Per Person</h2>
+            <table id="deductionSummaryTable" border="1" style="border-collapse:collapse; min-width:300px;">
+                <thead>
+                    <tr><th>Member</th><th>Total Deducted (₹)</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        // Helper functions for localStorage
+        function getMembers() {
+            return JSON.parse(localStorage.getItem('members') || '[]');
+        }
+        function setMembers(members) {
+            localStorage.setItem('members', JSON.stringify(members));
+        }
+        function getDeductions() {
+            return JSON.parse(localStorage.getItem('deductions') || '[]');
+        }
+        function setDeductions(deductions) {
+            localStorage.setItem('deductions', JSON.stringify(deductions));
+        }
+
+        // Render members list and dropdown
+        function renderMembers() {
+            const members = getMembers();
+            const ul = document.getElementById('membersUl');
+            const select = document.getElementById('deductMember');
+            ul.innerHTML = '';
+            select.innerHTML = '';
+            members.forEach((m, idx) => {
+                const li = document.createElement('li');
+                li.className = 'member-item';
+                li.textContent = `${m.name} - Balance: ₹${m.balance}`;
+                ul.appendChild(li);
+                const option = document.createElement('option');
+                option.value = idx;
+                option.textContent = m.name;
+                select.appendChild(option);
+            });
+        }
+
+        // Render deduction history
+        function renderDeductions() {
+            const list = document.getElementById('deductionList');
+            const deductions = getDeductions();
+            if (!deductions.length) {
+                list.innerHTML = '<li>No deductions yet.</li>';
+                return;
+            }
+            list.innerHTML = '';
+            deductions.forEach(d => {
+                const li = document.createElement('li');
+                li.textContent = `${d.date} - ${d.name}: ₹${d.amount} for ${d.product || 'N/A'}`;
+                list.appendChild(li);
+            });
+        }
+
+        // Render deduction summary per person
+        function renderDeductionSummary() {
+            const members = getMembers();
+            const deductions = getDeductions();
+            const summary = {};
+            let grandTotal = 0;
+            deductions.forEach(d => {
+                if (!summary[d.name]) summary[d.name] = 0;
+                summary[d.name] += Number(d.amount);
+                grandTotal += Number(d.amount);
+            });
+            const tbody = document.querySelector('#deductionSummaryTable tbody');
+            tbody.innerHTML = '';
+            members.forEach(m => {
+                const tr = document.createElement('tr');
+                const tdName = document.createElement('td');
+                tdName.textContent = m.name;
+                const tdTotal = document.createElement('td');
+                tdTotal.textContent = summary[m.name] ? summary[m.name].toFixed(2) : '0.00';
+                tr.appendChild(tdName);
+                tr.appendChild(tdTotal);
+                tbody.appendChild(tr);
+            });
+            // Add total row
+            const trTotal = document.createElement('tr');
+            const tdLabel = document.createElement('td');
+            tdLabel.textContent = 'Total';
+            tdLabel.style.fontWeight = 'bold';
+            const tdGrand = document.createElement('td');
+            let avg = members.length > 0 ? (grandTotal / members.length) : 0;
+            tdGrand.innerHTML = `${grandTotal.toFixed(2)} <span style='color:#888;'>(Avg per person: ₹${avg.toFixed(2)})</span>`;
+            tdGrand.style.fontWeight = 'bold';
+            trTotal.appendChild(tdLabel);
+            trTotal.appendChild(tdGrand);
+            tbody.appendChild(trTotal);
+        }
+
+        // Add member
+        document.getElementById('addMemberForm').onsubmit = function(e) {
+            e.preventDefault();
+            const name = document.getElementById('memberName').value.trim();
+            const msg = document.getElementById('addMemberMsg');
+            if (!name) {
+                msg.textContent = 'Name required!';
+                msg.className = 'error';
+                return;
+            }
+            let members = getMembers();
+            if (members.some(m => m.name.toLowerCase() === name.toLowerCase())) {
+                msg.textContent = 'Member already exists!';
+                msg.className = 'error';
+                return;
+            }
+            members.push({ name, balance: 0 });
+            setMembers(members);
+            updateAll();
+            msg.textContent = 'Member added!';
+            msg.className = 'success';
+            document.getElementById('memberName').value = '';
+        };
+
+        // Deduct cost
+        document.getElementById('deductForm').onsubmit = function(e) {
+            e.preventDefault();
+            const idx = document.getElementById('deductMember').value;
+            const amount = parseFloat(document.getElementById('deductAmount').value);
+            const product = document.getElementById('deductProduct').value.trim();
+            const msg = document.getElementById('deductMsg');
+            let members = getMembers();
+            if (!members[idx]) {
+                msg.textContent = 'Invalid member!';
+                msg.className = 'error';
+                return;
+            }
+            if (amount <= 0) {
+                msg.textContent = 'Amount must be positive!';
+                msg.className = 'error';
+                return;
+            }
+            if (!product) {
+                msg.textContent = 'Product name required!';
+                msg.className = 'error';
+                return;
+            }
+            members[idx].balance -= amount;
+            setMembers(members);
+            // Add to deduction history
+            let deductions = getDeductions();
+            deductions.unshift({
+                name: members[idx].name,
+                amount: amount,
+                product: product,
+                date: new Date().toLocaleString()
+            });
+            setDeductions(deductions);
+            updateAll();
+            msg.textContent = `₹${amount} deducted from ${members[idx].name} for ${product}`;
+            msg.className = 'success';
+            document.getElementById('deductAmount').value = '';
+            document.getElementById('deductProduct').value = '';
+        };
+
+        // Update summary after deduction or member change
+        function updateAll() {
+            renderMembers();
+            renderDeductions();
+            renderDeductionSummary();
+        }
+
+        // Initial render
+        renderMembers();
+        renderDeductions();
+        renderDeductionSummary();
+    </script>
+</body>
+</html>
