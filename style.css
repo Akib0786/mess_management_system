@@ -1,0 +1,151 @@
+/* Modern and beautiful UI for Mess Management System */
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: url('member.jpg') center center no-repeat fixed;
+    background-size: cover;
+    position: relative;
+}
+.container {
+    background: rgba(255,255,255,0.35); /* More transparent */
+    max-width: 700px;
+    margin: 40px auto 0 auto;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    padding: 32px 28px 24px 28px;
+    /* Remove strong white for more background visibility */
+}
+h1 {
+    text-align: center;
+    color: #ff7e5f;
+    margin-bottom: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+h2 {
+    color: #333;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+input[type="text"], input[type="number"], select {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+}
+input[type="text"]:focus, input[type="number"]:focus, select:focus {
+    border: 1.5px solid #ff7e5f;
+}
+button {
+    background: linear-gradient(90deg, #ff7e5f 0%, #feb47b 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(255,126,95,0.08);
+}
+button:hover {
+    background: linear-gradient(90deg, #feb47b 0%, #ff7e5f 100%);
+    box-shadow: 0 4px 16px rgba(255,126,95,0.13);
+}
+#resetBtn {
+    width: 100%;
+    margin: 24px 0 0 0;
+    background: linear-gradient(90deg, #e67e22 0%, #f6d365 100%);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    padding: 12px 0;
+    box-shadow: 0 2px 8px rgba(230,126,34,0.08);
+}
+#resetBtn:hover {
+    background: linear-gradient(90deg, #f6d365 0%, #e67e22 100%);
+}
+.members-list {
+    position: relative;
+    padding-top: 40px;
+}
+.members-list::before {
+    /* Optionally hide the small avatar if you want only the big background */
+    display: none;
+}
+.members-list h2 {
+    margin-top: 16px;
+    text-align: center;
+    font-size: 1.15rem;
+    color: #ff7e5f;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+.deduct-section, .deduction-history, .deduction-summary {
+    margin-bottom: 18px;
+}
+table {
+    width: 100%;
+    background: #fafafa;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+thead {
+    background: #ff7e5f;
+    color: #fff;
+}
+th, td {
+    padding: 10px 8px;
+    text-align: left;
+}
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+tr:last-child td {
+    border-bottom: none;
+}
+.member-item button, td button {
+    margin-right: 6px;
+    padding: 6px 12px;
+    font-size: 0.95rem;
+}
+.success {
+    color: #27ae60;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.error {
+    color: #e74c3c;
+    font-weight: 500;
+    margin-left: 10px;
+}
+#deductionList {
+    padding-left: 18px;
+    margin: 0;
+}
+#deductionList li {
+    margin-bottom: 4px;
+    font-size: 1rem;
+}
+::-webkit-scrollbar {
+    width: 8px;
+    background: #f6d365;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff7e5f;
+    border-radius: 8px;
+}
