@@ -7,15 +7,33 @@ body {
     background: url('member.jpg') center center no-repeat fixed;
     background-size: cover;
     position: relative;
+    /* color: #222; */
 }
 .container {
-    background: rgba(255,255,255,0.35); /* More transparent */
+    background: rgba(255,255,255,0.35); /* Revert to previous opacity */
     max-width: 700px;
     margin: 40px auto 0 auto;
     border-radius: 18px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.10);
     padding: 32px 28px 24px 28px;
-    /* Remove strong white for more background visibility */
+}
+h1, h2, th, td, label, span, input, button {
+    color: inherit !important;
+    text-shadow: none;
+}
+.members-list, .deduct-section, .deduction-history, .deduction-summary {
+    background: rgba(255,255,255,0.18);
+}
+#deductionList li {
+    background: rgba(255,255,255,0.7);
+    color: inherit;
+}
+input[type="text"], input[type="number"], select {
+    background: rgba(255,255,255,0.85);
+    color: inherit;
+}
+button {
+    color: #fff !important;
 }
 h1 {
     text-align: center;
@@ -28,8 +46,7 @@ h2 {
     color: #333;
     margin-top: 24px;
     margin-bottom: 12px;
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.2
 }
 form {
     display: flex;
