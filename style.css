@@ -7,147 +7,134 @@ body {
     background: url('member.jpg') center center no-repeat fixed;
     background-size: cover;
     position: relative;
-    /* color: #222; */
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(120deg,rgba(255,255,255,0.55) 0%,rgba(255,200,120,0.18) 100%);
+    z-index: 0;
+    pointer-events: none;
+    backdrop-filter: blur(2.5px);
 }
 .container {
-    background: rgba(255,255,255,0.35); /* Revert to previous opacity */
+    background: rgba(255,255,255,0.78);
     max-width: 700px;
     margin: 40px auto 0 auto;
-    border-radius: 18px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-    padding: 32px 28px 24px 28px;
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(255,126,95,0.13), 0 1.5px 8px #ffd18080;
+    padding: 38px 28px 28px 28px;
+    backdrop-filter: blur(8px);
+    border: 2px solid #ffd180;
+    position: relative;
+    z-index: 1;
 }
 h1, h2, th, td, label, span, input, button {
     color: inherit !important;
     text-shadow: none;
 }
 .members-list, .deduct-section, .deduction-history, .deduction-summary {
-    background: rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.22);
+    border-radius: 14px;
+    box-shadow: 0 1px 8px #ffd18030;
+    padding: 16px 12px 12px 12px;
+    margin-bottom: 22px;
 }
 #deductionList li {
-    background: rgba(255,255,255,0.7);
-    color: inherit;
+    background: #fffbe6;
+    border-radius: 8px;
+    padding: 7px 14px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px #ffd18030;
 }
 input[type="text"], input[type="number"], select {
-    background: rgba(255,255,255,0.85);
-    color: inherit;
-}
-button {
-    color: #fff !important;
-}
-h1 {
-    text-align: center;
-    color: #ff7e5f;
-    margin-bottom: 24px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-h2 {
-    color: #333;
-    margin-top: 24px;
-    margin-bottom: 12px;
-    font-size: 1.2
-}
-form {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 18px;
-}
-input[type="text"], input[type="number"], select {
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
+    padding: 10px 12px;
+    border: 1.5px solid #ffd180;
+    border-radius: 8px;
+    font-size: 1.05rem;
     outline: none;
-    transition: border 0.2s;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 1px 4px #ffd18030;
+    transition: border 0.2s, box-shadow 0.2s;
 }
 input[type="text"]:focus, input[type="number"]:focus, select:focus {
-    border: 1.5px solid #ff7e5f;
+    border: 2px solid #ff7e5f;
+    box-shadow: 0 2px 8px #ff7e5f30;
 }
-button {
+button, .back-link, .whatsapp-btn, .email-link {
     background: linear-gradient(90deg, #ff7e5f 0%, #feb47b 100%);
-    color: #fff;
+    color: #fff !important;
     border: none;
-    border-radius: 6px;
-    padding: 8px 18px;
-    font-size: 1rem;
-    font-weight: 500;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 1.05rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px rgba(255,126,95,0.08);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px #ff7e5f20;
+    text-decoration: none;
+    display: inline-block;
 }
-button:hover {
+button:hover, .back-link:hover, .whatsapp-btn:hover, .email-link:hover {
     background: linear-gradient(90deg, #feb47b 0%, #ff7e5f 100%);
-    box-shadow: 0 4px 16px rgba(255,126,95,0.13);
+    box-shadow: 0 4px 16px #ff7e5f30;
+    transform: translateY(-2px) scale(1.04);
+    color: #fff !important;
 }
 #resetBtn {
     width: 100%;
-    margin: 24px 0 0 0;
+    margin: 36px 0 24px 0;
     background: linear-gradient(90deg, #e67e22 0%, #f6d365 100%);
     color: #fff;
-    font-weight: 600;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    padding: 12px 0;
-    box-shadow: 0 2px 8px rgba(230,126,34,0.08);
+    font-weight: 700;
+    font-size: 1.18rem;
+    border-radius: 12px;
+    padding: 16px 0;
+    box-shadow: 0 2px 12px #e67e2230;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    position: relative;
 }
 #resetBtn:hover {
     background: linear-gradient(90deg, #f6d365 0%, #e67e22 100%);
 }
-.members-list {
-    position: relative;
-    padding-top: 40px;
-}
-.members-list::before {
-    /* Optionally hide the small avatar if you want only the big background */
-    display: none;
-}
-.members-list h2 {
-    margin-top: 16px;
-    text-align: center;
-    font-size: 1.15rem;
-    color: #ff7e5f;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-.deduct-section, .deduction-history, .deduction-summary {
-    margin-bottom: 18px;
-}
 table {
     width: 100%;
-    background: #fafafa;
-    border-radius: 8px;
+    background: #fffbe6;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 8px #ffd18030;
+    margin-bottom: 10px;
 }
 thead {
-    background: #ff7e5f;
+    background: linear-gradient(90deg,#ff7e5f 0%,#feb47b 100%);
     color: #fff;
+    font-size: 1.08rem;
 }
 th, td {
-    padding: 10px 8px;
+    padding: 12px 10px;
     text-align: left;
 }
 tr:nth-child(even) {
-    background: #f9f9f9;
+    background: #fff8e1;
 }
 tr:last-child td {
     border-bottom: none;
 }
 .member-item button, td button {
     margin-right: 6px;
-    padding: 6px 12px;
-    font-size: 0.95rem;
+    padding: 7px 14px;
+    font-size: 1rem;
+    border-radius: 6px;
 }
 .success {
     color: #27ae60;
-    font-weight: 500;
+    font-weight: 600;
     margin-left: 10px;
 }
 .error {
     color: #e74c3c;
-    font-weight: 500;
+    font-weight: 600;
     margin-left: 10px;
 }
 #deductionList {
@@ -155,8 +142,12 @@ tr:last-child td {
     margin: 0;
 }
 #deductionList li {
-    margin-bottom: 4px;
-    font-size: 1rem;
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+    background: #fffbe6;
+    border-radius: 8px;
+    padding: 7px 14px;
+    box-shadow: 0 1px 3px #ffd18030;
 }
 ::-webkit-scrollbar {
     width: 8px;
@@ -166,7 +157,6 @@ tr:last-child td {
     background: #ff7e5f;
     border-radius: 8px;
 }
-
 /* Responsive Design */
 @media (max-width: 900px) {
     .container {
@@ -205,41 +195,95 @@ tr:last-child td {
         padding: 10px 0;
     }
 }
-
 /* Beautiful UI Tweaks */
 .container {
-    backdrop-filter: blur(6px);
-    border: 1.5px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    border: 2px solid #ffd180;
 }
 input[type="text"], input[type="number"], select {
-    background: rgba(255,255,255,0.85);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 1px 4px #ffd18030;
 }
 input[type="text"]::placeholder, input[type="number"]::placeholder {
     color: #bbb;
     font-style: italic;
 }
 form button[type="submit"] {
-    min-width: 110px;
+    min-width: 120px;
 }
 .members-list, .deduct-section, .deduction-history, .deduction-summary {
-    background: rgba(255,255,255,0.18);
-    border-radius: 10px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.03);
-    padding: 12px 10px 10px 10px;
-    margin-bottom: 18px;
+    background: rgba(255,255,255,0.22);
+    border-radius: 14px;
+    box-shadow: 0 1px 8px #ffd18030;
+    padding: 16px 12px 12px 12px;
+    margin-bottom: 22px;
 }
 .members-list {
     padding-top: 24px;
 }
 #deductionList li {
-    background: rgba(255,255,255,0.7);
-    border-radius: 6px;
-    padding: 5px 10px;
-    margin-bottom: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    background: #fffbe6;
+    border-radius: 8px;
+    padding: 7px 14px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px #ffd18030;
 }
 ::-webkit-input-placeholder { color: #bbb; }
 ::-moz-placeholder { color: #bbb; }
 :-ms-input-placeholder { color: #bbb; }
 ::placeholder { color: #bbb; }
+/* Footer and Hit Counter Styles */
+footer {
+    text-align: center;
+    margin: 0 0 32px 0;
+    color: #888;
+    font-size: 1.08rem;
+    z-index: 2;
+    position: relative;
+}
+footer a {
+    display: inline-block;
+    background: linear-gradient(90deg,#e96601,#e28503);
+    color: #222;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.13rem;
+    padding: 12px 36px;
+    border-radius: 28px;
+    box-shadow: 0 2px 12px #ffd18060;
+    transition: background 0.2s, box-shadow 0.2s;
+    margin-bottom: 0;
+}
+footer a:hover {
+    background: linear-gradient(90deg,#e28503,#e96601);
+    box-shadow: 0 4px 18px #ffd18080;
+}
+.hit-counter-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 38px 0 24px 0;
+    z-index: 2;
+    position: relative;
+}
+.hit-counter-card {
+    background: linear-gradient(135deg,#fffbe6 0%,#ffe0b2 100%);
+    border-radius: 22px;
+    border: 1.5px solid #ffd180;
+    box-shadow: 0 4px 18px #e2850340;
+    padding: 18px 44px 24px 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 360px;
+    transition: box-shadow 0.2s;
+}
+@media (max-width: 600px) {
+    #resetBtn, footer a, .hit-counter-card {
+        font-size: 1rem;
+        padding: 10px 0;
+    }
+    .hit-counter-card {
+        padding: 12px 10px 16px 10px;
+    }
+}
