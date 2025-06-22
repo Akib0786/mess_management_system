@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Mess Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: url('member.jpg') center center no-repeat fixed;
+            background-size: cover;
+        }
+        .contact-container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: rgba(255,255,255,0.92);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            padding: 36px 28px 28px 28px;
+            text-align: center;
+        }
+        .contact-container h2 {
+            color: #ff7e5f;
+            margin-bottom: 18px;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .contact-container a.whatsapp-btn {
+            display: inline-block;
+            background: linear-gradient(90deg,#25D366,#128C7E);
+            color: #fff;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 1.08rem;
+            padding: 10px 32px;
+            border-radius: 24px;
+            box-shadow: 0 2px 8px rgba(37,211,102,0.10);
+            margin: 18px 0 10px 0;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .contact-container a.whatsapp-btn:hover {
+            background: linear-gradient(90deg,#128C7E,#25D366);
+            color: #fff;
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(37,211,102,0.18);
+            filter: brightness(1.08);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+        .contact-container .email-link {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .contact-container .email-link:hover {
+            text-decoration: underline;
+        }
+        .contact-info {
+            margin: 18px 0 0 0;
+            font-size: 1.1rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #ff7e5f;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #128C7E;
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <h2>Contact Akib</h2>
+        <div class="contact-info">
+            <a class="whatsapp-btn" href="https://wa.me/917481004962" target="_blank">
+                <i class="fab fa-whatsapp" style="margin-right:8px;"></i>Message on WhatsApp
+            </a><br>
+            <a class="email-link" href="mailto:akib43940@gmail.com">
+                <i class="fas fa-envelope" style="margin-right:6px;"></i>mail
+            </a>
+        </div>
+        <a class="back-link" href="index.html">&larr; Back to Home</a>
+    </div>
+</body>
+</html>
